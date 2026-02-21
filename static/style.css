@@ -1,0 +1,15 @@
+body {
+    background-color: #121212; /* สีดำเข้มๆ ดุดัน */
+}
+
+/* ตกแต่งการ์ดสถิติ */
+.card {
+    border: 1px solid #ffc107; /* ขอบสีเหลืองทอง */
+    transition: transform 0.2s; /* เตรียมทำเอฟเฟกต์ */
+}
+
+/* เอฟเฟกต์เด้งๆ เวลาเอาเมาส์ไปชี้ที่การ์ด */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+}
