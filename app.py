@@ -40,7 +40,7 @@ class Practice(db.Model):
 # ----------------- Routes -----------------
 @app.route('/')
 def home():
-    return "<h1>Hoop Analytics Database is Ready!</h1>"
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
