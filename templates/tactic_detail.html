@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card bg-dark border-info">
+            <div class="card-header bg-info text-dark fw-bold">
+                📋 Tactic Details
+            </div>
+            <div class="card-body text-white">
+                <h3 class="text-warning mb-3">{{ tactic.name }}</h3>
+                <p><strong>Description:</strong><br>{{ tactic.description }}</p>
+                <p class="text-success"><strong>Strengths:</strong> {{ tactic.strength }}</p>
+                <p class="text-danger"><strong>Weaknesses:</strong> {{ tactic.weakness }}</p>
+                <div class="mt-4">
+                    <a href="/tactics" class="btn btn-outline-light">Back to Playbook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

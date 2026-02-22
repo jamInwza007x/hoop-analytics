@@ -58,6 +58,10 @@ def add_tactic():
     db.session.commit()
     
     return redirect(url_for('playbook'))
+@app.route('/tactics/<int:id>')
+def tactic_detail(id):
+    tactic = Tactic.query.get_or_404(id)
+    return render_template('tactic_detail.html', tactic=tactic)
 
 if __name__ == '__main__':
     app.run(debug=True)
