@@ -62,6 +62,9 @@ def add_tactic():
 def tactic_detail(id):
     tactic = Tactic.query.get_or_404(id)
     return render_template('tactic_detail.html', tactic=tactic)
+@app.route('/tactics/add')
+def add_tactic_form():
+    return render_template('add_tactic.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
