@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -46,6 +46,18 @@ def playbook():
     # ดึงข้อมูลแผนการเล่นทั้งหมดจากฐานข้อมูล
     all_tactics = Tactic.query.all()
     return render_template('tactics.html', tactics=all_tactics)
+@app.route('/tactics/add', methods=['POST'])
+def add_tactic():
+    name = request.form.get('name')
+    description = request.form.get('description')
+    strength = request.form.get('strength')
+    weakness = request.form.get('weakness')
+    
+    new_tactic = Tactic(name=name, description=description, strength=strength, weakness=weakness)
+    db.session.add(new_tactic)
+    db.session.commit()
+    
+    return redirect(url_for('playbook'))
 
 if __name__ == '__main__':
     app.run(debug=True)
