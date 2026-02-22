@@ -41,6 +41,11 @@ class Practice(db.Model):
 @app.route('/')
 def home():
     return render_template('index.html')
+@app.route('/tactics')
+def playbook():
+    # ดึงข้อมูลแผนการเล่นทั้งหมดจากฐานข้อมูล
+    all_tactics = Tactic.query.all()
+    return render_template('tactics.html', tactics=all_tactics)
 
 if __name__ == '__main__':
     app.run(debug=True)
