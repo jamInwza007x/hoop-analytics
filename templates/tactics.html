@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-warning fw-bold">My Playbook</h2>
+        <a href="/tactics/add" class="btn btn-warning fw-bold">+ Add New Tactic</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for tactic in tactics %}
+    <div class="col-md-4 mb-3">
+        <div class="card bg-secondary text-white h-100">
+            <div class="card-body">
+                <h5 class="card-title text-warning">{{ tactic.name }}</h5>
+                <p class="card-text">{{ tactic.description[:50] }}...</p>
+                <a href="/tactics/{{ tactic.id }}" class="btn btn-outline-light btn-sm">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center text-muted mt-5">
+        <p>No tactics added yet.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
