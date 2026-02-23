@@ -96,5 +96,7 @@ def add_match():
     
     return render_template('add_match.html')
 
+with app.app_context():
+    db.create_all()
 if __name__ == '__main__':
     app.run(debug=True)
