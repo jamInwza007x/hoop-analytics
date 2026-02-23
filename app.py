@@ -46,25 +46,26 @@ def playbook():
     # ดึงข้อมูลแผนการเล่นทั้งหมดจากฐานข้อมูล
     all_tactics = Tactic.query.all()
     return render_template('tactics.html', tactics=all_tactics)
-@app.route('/tactics/add', methods=['POST'])
+@app.route('/tactics/add', methods=['GET', 'POST'])
 def add_tactic():
-    name = request.form.get('name')
-    description = request.form.get('description')
-    strength = request.form.get('strength')
-    weakness = request.form.get('weakness')
+    if request.method == 'POST':
+        name = request.form.get('name')
+        description = request.form.get('description')
+        strength = request.form.get('strength')
+        weakness = request.form.get('weakness')
+        
+        new_tactic = Tactic(name=name, description=description, strength=strength, weakness=weakness)
+        db.session.add(new_tactic)
+        db.session.commit()
+        
+        return redirect(url_for('playbook'))
     
-    new_tactic = Tactic(name=name, description=description, strength=strength, weakness=weakness)
-    db.session.add(new_tactic)
-    db.session.commit()
-    
-    return redirect(url_for('playbook'))
+    return render_template('add_tactic.html')
+
 @app.route('/tactics/<int:id>')
 def tactic_detail(id):
     tactic = Tactic.query.get_or_404(id)
     return render_template('tactic_detail.html', tactic=tactic)
-@app.route('/tactics/add')
-def add_tactic_form():
-    return render_template('add_tactic.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
