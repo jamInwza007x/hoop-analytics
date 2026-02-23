@@ -36,6 +36,12 @@ class Practice(db.Model):
     date = db.Column(db.DateTime, default=datetime.utcnow)
     skill = db.Column(db.String(100), nullable=False) # เช่น ชู้ต 3 แต้ม, เลย์อัพ
     duration_mins = db.Column(db.Integer, nullable=False)
+class Match(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    opponent = db.Column(db.String(100), nullable=False)
+    result = db.Column(db.String(20), nullable=False)
+    points_scored = db.Column(db.Integer, nullable=False)
+    points_conceded = db.Column(db.Integer, nullable=False)
 
 # ----------------- Routes -----------------
 @app.route('/')
