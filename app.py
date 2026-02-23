@@ -40,7 +40,10 @@ class Practice(db.Model):
 # ----------------- Routes -----------------
 @app.route('/')
 def home():
-    return render_template('index.html')
+    # นับจำนวนแมตช์และแผนการเล่นทั้งหมดจากฐานข้อมูล
+    total_matches = Match.query.count()
+    total_tactics = Tactic.query.count()
+    return render_template('index.html', total_matches=total_matches, total_tactics=total_tactics)
 @app.route('/tactics')
 def playbook():
     # ดึงข้อมูลแผนการเล่นทั้งหมดจากฐานข้อมูล
