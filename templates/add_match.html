@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card bg-dark border-warning">
+            <div class="card-header bg-warning text-dark fw-bold">
+                ➕ Add Match Result
+            </div>
+            <div class="card-body text-white">
+                <form action="/matches/add" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Opponent Team</label>
+                        <input type="text" class="form-control bg-secondary text-white border-secondary" name="opponent" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Result</label>
+                        <select class="form-select bg-secondary text-white border-secondary" name="result" required>
+                            <option value="Win">Win</option>
+                            <option value="Loss">Loss</option>
+                        </select>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="form-label">Our Score</label>
+                            <input type="number" class="form-control bg-secondary text-white border-secondary" name="points_scored" required>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Opponent Score</label>
+                            <input type="number" class="form-control bg-secondary text-white border-secondary" name="points_conceded" required>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning fw-bold">Save Match</button>
+                        <a href="/matches" class="btn btn-outline-light">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

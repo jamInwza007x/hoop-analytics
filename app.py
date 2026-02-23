@@ -66,6 +66,26 @@ def add_tactic():
 def tactic_detail(id):
     tactic = Tactic.query.get_or_404(id)
     return render_template('tactic_detail.html', tactic=tactic)
+@app.route('/matches')
+def match_history():
+    all_matches = Match.query.all()
+    return render_template('matches.html', matches=all_matches)
+
+@app.route('/matches/add', methods=['GET', 'POST'])
+def add_match():
+    if request.method == 'POST':
+        opponent = request.form.get('opponent')
+        result = request.form.get('result')
+        points_scored = request.form.get('points_scored')
+        points_conceded = request.form.get('points_conceded')
+        
+        new_match = Match(opponent=opponent, result=result, points_scored=points_scored, points_conceded=points_conceded)
+        db.session.add(new_match)
+        db.session.commit()
+        
+        return redirect(url_for('match_history'))
+    
+    return render_template('add_match.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
