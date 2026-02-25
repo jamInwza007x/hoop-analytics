@@ -120,6 +120,9 @@ def add_practice():
     
     return render_template('add_practice.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':

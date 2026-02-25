@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+        <div class="card bg-dark border-warning shadow-lg">
+            <div class="card-header bg-warning text-dark text-center fw-bold fs-4">
+                🏀 Player Profile
+            </div>
+            <div class="card-body text-white text-center py-5">
+                <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Profile" class="img-fluid rounded-circle mb-3 bg-light p-2" style="width: 150px;">
+                <h2 class="text-warning fw-bold">James</h2>
+                <h5 class="text-muted mb-4">Future NBA Player 🌟</h5>
+                
+                <ul class="list-group list-group-flush text-start rounded">
+                    <li class="list-group-item bg-secondary text-white border-dark">
+                        <strong>Daily Practice:</strong> 18:00 - 22:00
+                    </li>
+                    <li class="list-group-item bg-secondary text-white border-dark">
+                        <strong>Idols:</strong> Stephen Curry, Chris Paul, Darius Garland
+                    </li>
+                    <li class="list-group-item bg-secondary text-white border-dark">
+                        <strong>Shoes:</strong> Way of Wade 10
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
