@@ -95,6 +95,30 @@ def add_match():
         return redirect(url_for('match_history'))
     
     return render_template('add_match.html')
+@app.route('/practice')
+def practice_log():
+    # ดึงข้อมูลการซ้อมทั้งหมด เรียงจากล่าสุดไปเก่าสุด
+    logs = Practice.query.order_by(Practice.date.desc()).all()
+    return render_template('practice.html', practices=logs)
+
+@app.route('/practice/add', methods=['GET', 'POST'])
+def add_practice():
+    if request.method == 'POST':
+        date_str = request.form.get('date')
+        skill = request.form.get('skill')
+        duration = request.form.get('duration')
+        
+        # แปลงวันที่จากข้อความให้เป็นวันที่จริงๆ
+        from datetime import datetime
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        
+        new_log = Practice(date=date_obj, skill=skill, duration_mins=duration)
+        db.session.add(new_log)
+        db.session.commit()
+        
+        return redirect(url_for('practice_log'))
+    
+    return render_template('add_practice.html')
 
 with app.app_context():
     db.create_all()
