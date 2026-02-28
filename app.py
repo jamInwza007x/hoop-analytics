@@ -66,6 +66,7 @@ def add_tactic():
         new_tactic = Tactic(name=name, description=description, strength=strength, weakness=weakness)
         db.session.add(new_tactic)
         db.session.commit()
+        flash('Tactic added! 📋', 'success')
         
         return redirect(url_for('playbook'))
     
