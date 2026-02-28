@@ -27,6 +27,7 @@ class Tactic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    type = db.Column(db.String(20), nullable=True)
     strength = db.Column(db.String(200), nullable=True)
     weakness = db.Column(db.String(200), nullable=True)
 
@@ -46,28 +47,31 @@ class Match(db.Model):
 # ----------------- Routes -----------------
 @app.route('/')
 def home():
-    # นับจำนวนแมตช์และแผนการเล่นทั้งหมดจากฐานข้อมูล
     total_matches = Match.query.count()
     total_tactics = Tactic.query.count()
     return render_template('index.html', total_matches=total_matches, total_tactics=total_tactics)
 @app.route('/tactics')
+@app.route('/tactics')
 def playbook():
-    # ดึงข้อมูลแผนการเล่นทั้งหมดจากฐานข้อมูล
-    all_tactics = Tactic.query.all()
+    filter_type = request.args.get('type')
+    if filter_type:
+        all_tactics = Tactic.query.filter_by(type=filter_type).all()
+    else:
+        all_tactics = Tactic.query.all()
     return render_template('tactics.html', tactics=all_tactics)
 @app.route('/tactics/add', methods=['GET', 'POST'])
 def add_tactic():
     if request.method == 'POST':
         name = request.form.get('name')
         description = request.form.get('description')
+        t_type = request.form.get('type')
         strength = request.form.get('strength')
         weakness = request.form.get('weakness')
         
-        new_tactic = Tactic(name=name, description=description, strength=strength, weakness=weakness)
+        new_tactic = Tactic(name=name, description=description, type=t_type, strength=strength, weakness=weakness)
         db.session.add(new_tactic)
         db.session.commit()
         flash('Tactic added! 📋', 'success')
-        
         return redirect(url_for('playbook'))
     
     return render_template('add_tactic.html')
@@ -78,8 +82,12 @@ def tactic_detail(id):
     return render_template('tactic_detail.html', tactic=tactic)
 @app.route('/matches')
 def match_history():
-    all_matches = Match.query.all()
-    return render_template('matches.html', matches=all_matches)
+    search = request.args.get('search')
+    if search:
+        matches = Match.query.filter(Match.opponent.contains(search)).order_by(Match.id.desc()).all()
+    else:
+        matches = Match.query.order_by(Match.id.desc()).all()
+    return render_template('matches.html', matches=matches)
 
 @app.route('/matches/add', methods=['GET', 'POST'])
 def add_match():
@@ -99,8 +107,11 @@ def add_match():
     return render_template('add_match.html')
 @app.route('/practice')
 def practice_log():
-    # ดึงข้อมูลการซ้อมทั้งหมด เรียงจากล่าสุดไปเก่าสุด
-    logs = Practice.query.order_by(Practice.date.desc()).all()
+    search = request.args.get('search')
+    if search:
+        logs = Practice.query.filter(Practice.skill.contains(search)).order_by(Practice.date.desc()).all()
+    else:
+        logs = Practice.query.order_by(Practice.date.desc()).all()
     return render_template('practice.html', practices=logs)
 
 @app.route('/practice/add', methods=['GET', 'POST'])
