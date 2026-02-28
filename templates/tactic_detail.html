@@ -13,7 +13,9 @@
                 <p class="text-success"><strong>Strengths:</strong> {{ tactic.strength }}</p>
                 <p class="text-danger"><strong>Weaknesses:</strong> {{ tactic.weakness }}</p>
                 <div class="mt-4">
-                    <a href="/tactics" class="btn btn-outline-light">Back to Playbook</a>
+                    <a href="/tactics" class="btn btn-outline-light">Back to Playbook</a><form action="/tactics/delete/{{ tactic.id }}" method="POST" class="d-inline float-end mt-3">
+    <button type="submit" class="btn btn-danger">Delete Tactic</button>
+</form>
                 </div>
             </div>
         </div>
