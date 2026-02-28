@@ -152,6 +152,7 @@ def edit_practice(id):
         from datetime import datetime
         practice_to_edit.date = datetime.strptime(date_str, '%Y-%m-%d')
         db.session.commit()
+        flash('Practice log updated! ✏️', 'info')
         return redirect(url_for('practice_log'))
     return render_template('edit_practice.html', practice=practice_to_edit)
 @app.route('/matches/edit/<int:id>', methods=['GET', 'POST'])
