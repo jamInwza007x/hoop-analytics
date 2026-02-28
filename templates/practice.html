@@ -13,7 +13,9 @@
         <ul class="list-group">
             {% for p in practices %}
             <li class="list-group-item bg-secondary text-white border-warning mb-2 rounded">
-                <strong>{{ p.date.strftime('%Y-%m-%d') }}</strong> | Skill: <span class="text-warning">{{ p.skill }}</span> ({{ p.duration_mins }} mins)
+                <strong>{{ p.date.strftime('%Y-%m-%d') }}</strong> | Skill: <span class="text-warning">{{ p.skill }}</span> ({{ p.duration_mins }} mins)<form action="/practice/delete/{{ p.id }}" method="POST" class="d-inline float-end">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
             </li>
             {% else %}
             <li class="list-group-item bg-dark text-muted text-center border-secondary">
