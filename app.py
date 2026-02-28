@@ -136,6 +136,7 @@ def delete_match(id):
     match_to_delete = Match.query.get_or_404(id)
     db.session.delete(match_to_delete)
     db.session.commit()
+    flash('Match record deleted! 🗑️', 'danger')
     return redirect(url_for('match_history'))
 @app.route('/tactics/delete/<int:id>', methods=['POST'])
 def delete_tactic(id):
@@ -165,6 +166,7 @@ def edit_match(id):
         match_to_edit.points_scored = request.form.get('points_scored')
         match_to_edit.points_conceded = request.form.get('points_conceded')
         db.session.commit()
+        flash('Match record updated! ✏️', 'info')
         return redirect(url_for('match_history'))
     return render_template('edit_match.html', match=match_to_edit)
 @app.route('/tactics/edit/<int:id>', methods=['GET', 'POST'])
