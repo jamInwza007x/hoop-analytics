@@ -91,6 +91,7 @@ def add_match():
         new_match = Match(opponent=opponent, result=result, points_scored=points_scored, points_conceded=points_conceded)
         db.session.add(new_match)
         db.session.commit()
+        flash('Match record added! 🏀', 'success')
         
         return redirect(url_for('match_history'))
     
