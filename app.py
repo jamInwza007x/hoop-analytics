@@ -144,6 +144,7 @@ def delete_tactic(id):
     tactic_to_delete = Tactic.query.get_or_404(id)
     db.session.delete(tactic_to_delete)
     db.session.commit()
+    flash('Tactic deleted! 🗑️', 'danger')
     return redirect(url_for('tactics'))
 @app.route('/practice/edit/<int:id>', methods=['GET', 'POST'])
 def edit_practice(id):
@@ -180,6 +181,7 @@ def edit_tactic(id):
         tactic_to_edit.strength = request.form.get('strength')
         tactic_to_edit.weakness = request.form.get('weakness')
         db.session.commit()
+        flash('Tactic updated! ✏️', 'info')
         return redirect(url_for('tactic_detail', id=tactic_to_edit.id))
     return render_template('edit_tactic.html', tactic=tactic_to_edit)
 with app.app_context():
