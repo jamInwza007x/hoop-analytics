@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -115,7 +115,7 @@ def add_practice():
         new_log = Practice(date=date_obj, skill=skill, duration_mins=duration)
         db.session.add(new_log)
         db.session.commit()
-        
+        flash('Practice log added! 🏀', 'success')
         return redirect(url_for('practice_log'))
     
     return render_template('add_practice.html')
