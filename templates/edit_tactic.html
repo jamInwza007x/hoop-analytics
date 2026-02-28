@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card bg-dark border-warning">
+            <div class="card-header bg-warning text-dark fw-bold">
+                ✏️ Edit Tactic
+            </div>
+            <div class="card-body text-white">
+                <form action="/tactics/edit/{{ tactic.id }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Tactic Name</label>
+                        <input type="text" class="form-control bg-secondary text-white border-secondary" name="name" value="{{ tactic.name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control bg-secondary text-white border-secondary" name="description" rows="3" required>{{ tactic.description }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <select class="form-select bg-secondary text-white border-secondary" name="type">
+                            <option value="Offense" {% if tactic.type == 'Offense' %}selected{% endif %}>Offense ⚔️</option>
+                            <option value="Defense" {% if tactic.type == 'Defense' %}selected{% endif %}>Defense 🛡️</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Strength</label>
+                        <input type="text" class="form-control bg-secondary text-white border-secondary" name="strength" value="{{ tactic.strength }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Weakness</label>
+                        <input type="text" class="form-control bg-secondary text-white border-secondary" name="weakness" value="{{ tactic.weakness }}">
+                    </div>
+                    <button type="submit" class="btn btn-warning fw-bold">Update Tactic</button>
+                    <a href="/tactics/{{ tactic.id }}" class="btn btn-outline-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
