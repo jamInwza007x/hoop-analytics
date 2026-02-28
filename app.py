@@ -129,6 +129,12 @@ def delete_practice(id):
     db.session.delete(log_to_delete)
     db.session.commit()
     return redirect(url_for('practice_log'))
+@app.route('/matches/delete/<int:id>', methods=['POST'])
+def delete_match(id):
+    match_to_delete = Match.query.get_or_404(id)
+    db.session.delete(match_to_delete)
+    db.session.commit()
+    return redirect(url_for('match_history'))
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
