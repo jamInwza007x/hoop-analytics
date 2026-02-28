@@ -135,6 +135,12 @@ def delete_match(id):
     db.session.delete(match_to_delete)
     db.session.commit()
     return redirect(url_for('match_history'))
+@app.route('/tactics/delete/<int:id>', methods=['POST'])
+def delete_tactic(id):
+    tactic_to_delete = Tactic.query.get_or_404(id)
+    db.session.delete(tactic_to_delete)
+    db.session.commit()
+    return redirect(url_for('tactics'))
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
