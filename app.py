@@ -123,6 +123,12 @@ def add_practice():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+@app.route('/practice/delete/<int:id>', methods=['POST'])
+def delete_practice(id):
+    log_to_delete = Practice.query.get_or_404(id)
+    db.session.delete(log_to_delete)
+    db.session.commit()
+    return redirect(url_for('practice_log'))
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
