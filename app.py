@@ -128,6 +128,7 @@ def delete_practice(id):
     log_to_delete = Practice.query.get_or_404(id)
     db.session.delete(log_to_delete)
     db.session.commit()
+    flash('Practice log deleted! 🗑️', 'danger')
     return redirect(url_for('practice_log'))
 @app.route('/matches/delete/<int:id>', methods=['POST'])
 def delete_match(id):
