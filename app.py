@@ -164,6 +164,18 @@ def edit_match(id):
         db.session.commit()
         return redirect(url_for('match_history'))
     return render_template('edit_match.html', match=match_to_edit)
+@app.route('/tactics/edit/<int:id>', methods=['GET', 'POST'])
+def edit_tactic(id):
+    tactic_to_edit = Tactic.query.get_or_404(id)
+    if request.method == 'POST':
+        tactic_to_edit.name = request.form.get('name')
+        tactic_to_edit.description = request.form.get('description')
+        tactic_to_edit.type = request.form.get('type')
+        tactic_to_edit.strength = request.form.get('strength')
+        tactic_to_edit.weakness = request.form.get('weakness')
+        db.session.commit()
+        return redirect(url_for('tactic_detail', id=tactic_to_edit.id))
+    return render_template('edit_tactic.html', tactic=tactic_to_edit)
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
