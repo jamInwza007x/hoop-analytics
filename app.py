@@ -141,6 +141,18 @@ def delete_tactic(id):
     db.session.delete(tactic_to_delete)
     db.session.commit()
     return redirect(url_for('tactics'))
+@app.route('/practice/edit/<int:id>', methods=['GET', 'POST'])
+def edit_practice(id):
+    practice_to_edit = Practice.query.get_or_404(id)
+    if request.method == 'POST':
+        date_str = request.form.get('date')
+        practice_to_edit.skill = request.form.get('skill')
+        practice_to_edit.duration_mins = request.form.get('duration')
+        from datetime import datetime
+        practice_to_edit.date = datetime.strptime(date_str, '%Y-%m-%d')
+        db.session.commit()
+        return redirect(url_for('practice_log'))
+    return render_template('edit_practice.html', practice=practice_to_edit)
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
