@@ -153,6 +153,17 @@ def edit_practice(id):
         db.session.commit()
         return redirect(url_for('practice_log'))
     return render_template('edit_practice.html', practice=practice_to_edit)
+@app.route('/matches/edit/<int:id>', methods=['GET', 'POST'])
+def edit_match(id):
+    match_to_edit = Match.query.get_or_404(id)
+    if request.method == 'POST':
+        match_to_edit.opponent = request.form.get('opponent')
+        match_to_edit.result = request.form.get('result')
+        match_to_edit.points_scored = request.form.get('points_scored')
+        match_to_edit.points_conceded = request.form.get('points_conceded')
+        db.session.commit()
+        return redirect(url_for('match_history'))
+    return render_template('edit_match.html', match=match_to_edit)
 with app.app_context():
     db.create_all()
 if __name__ == '__main__':
