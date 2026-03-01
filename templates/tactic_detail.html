@@ -1,23 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <div class="card bg-dark border-info">
-            <div class="card-header bg-info text-dark fw-bold">
-                📋 Tactic Details
-            </div>
-            <div class="card-body text-white">
-                <h3 class="text-warning mb-3">{{ tactic.name }}</h3>
-                <p><strong>Description:</strong><br>{{ tactic.description }}</p>
-                <p class="text-success"><strong>Strengths:</strong> {{ tactic.strength }}</p>
-                <p class="text-danger"><strong>Weaknesses:</strong> {{ tactic.weakness }}</p>
-                <div class="mt-4">
-                    <a href="/tactics" class="btn btn-outline-light">Back to Playbook</a><a href="/tactics/edit/{{ tactic.id }}" class="btn btn-info mt-3 me-2 float-end">Edit Tactic</a><form action="/tactics/delete/{{ tactic.id }}" method="POST" class="d-inline float-end mt-3">
-    <button type="submit" class="btn btn-danger">Delete Tactic</button>
-</form>
+<div class="mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('playbook') }}" class="text-warning">Playbook</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">{{ tactic.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="card bg-dark border-warning shadow-lg mt-3">
+        <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+            <h3 class="mb-0 fw-bold">{{ tactic.name }}</h3>
+            <span class="badge bg-dark text-warning">{{ tactic.type }}</span>
+        </div>
+        <div class="card-body text-white">
+            <h5 class="text-warning">Description:</h5>
+            <p class="mb-4">{{ tactic.description }}</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="p-3 bg-success bg-opacity-10 border border-success rounded">
+                        <h5 class="text-success fw-bold">💪 Strengths:</h5>
+                        <p class="mb-0">{{ tactic.strength }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-danger bg-opacity-10 border border-danger rounded">
+                        <h5 class="text-danger fw-bold">⚠️ Weaknesses:</h5>
+                        <p class="mb-0">{{ tactic.weakness }}</p>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="card-footer border-secondary">
+            <a href="{{ url_for('playbook') }}" class="btn btn-outline-light">Back to Playbook</a>
         </div>
     </div>
 </div>

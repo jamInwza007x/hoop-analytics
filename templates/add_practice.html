@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mt-4">
-    <div class="col-md-8 offset-md-2">
-        <div class="card bg-dark border-warning">
-            <div class="card-header bg-warning text-dark fw-bold">
-                💪 Log Practice Session
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card bg-dark border-warning shadow-lg">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0 fw-bold">Record Practice Session</h4>
             </div>
             <div class="card-body text-white">
-                <form action="/practice/add" method="POST">
+                <form action="{{ url_for('add_practice') }}" method="POST">
                     <div class="mb-3">
-                        <label class="form-label">Date</label>
-                        <input type="date" class="form-control bg-secondary text-white border-secondary" name="date" required>
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control bg-secondary text-white border-0" id="date" name="date" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Skill Focused (e.g., 3-Point, Dribbling)</label>
-                        <input type="text" class="form-control bg-secondary text-white border-secondary" name="skill" required>
+                        <label for="skill" class="form-label">Skill Focused</label>
+                        <input type="text" class="form-control bg-secondary text-white border-0" id="skill" name="skill" placeholder="e.g., 3-Point Shooting, Crossover" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Duration (Minutes)</label>
-                        <input type="number" class="form-control bg-secondary text-white border-secondary" name="duration" required>
+                        <label for="duration" class="form-label">Duration (Minutes)</label>
+                        <input type="number" class="form-control bg-secondary text-white border-0" id="duration" name="duration" placeholder="60" required>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-warning fw-bold">Save Log</button>
-                        <a href="/practice" class="btn btn-outline-light">Cancel</a>
+                        <button type="submit" class="btn btn-warning fw-bold">Save Session 🏀</button>
+                        <a href="{{ url_for('practice_log') }}" class="btn btn-outline-light">Cancel</a>
                     </div>
                 </form>
             </div>

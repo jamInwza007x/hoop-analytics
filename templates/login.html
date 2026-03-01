@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card bg-dark border-warning shadow-lg">
+            <div class="card-header bg-warning text-dark text-center">
+                <h4 class="mb-0 fw-bold">🏀 Login to Hoop Analytics</h4>
+            </div>
+            <div class="card-body text-white">
+                <form action="{{ url_for('login') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control bg-secondary text-white border-0" placeholder="Enter username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control bg-secondary text-white border-0" placeholder="Enter password" required>
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-warning fw-bold">Login 🚀</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center border-secondary">
+                <small class="text-muted">Don't have an account? <a href="{{ url_for('register') }}" class="text-warning">Register here</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

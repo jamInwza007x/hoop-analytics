@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card bg-dark border-info shadow-lg">
+            <div class="card-header bg-info text-dark text-center">
+                <h4 class="mb-0 fw-bold">👤 Create Player Profile</h4>
+            </div>
+            <div class="card-body text-white">
+                <form action="{{ url_for('register') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control bg-secondary text-white border-0" placeholder="e.g. Jiratada Putburi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Student ID</label>
+                        <input type="text" name="student_id" class="form-control bg-secondary text-white border-0" placeholder="e.g. 6810110448" required>
+                    </div>
+                    <hr class="border-secondary">
+                    <div class="mb-3">
+                        <label class="form-label">Username (for Login)</label>
+                        <input type="text" name="username" class="form-control bg-secondary text-white border-0" placeholder="Choose a username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control bg-secondary text-white border-0" placeholder="Create a password" required>
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-info text-dark fw-bold">Register & Hit the Court! 🏀</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center border-secondary">
+                <small class="text-muted">Already have an account? <a href="{{ url_for('login') }}" class="text-info">Login here</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

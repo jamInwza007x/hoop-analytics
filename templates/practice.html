@@ -3,37 +3,52 @@
 {% block content %}
 <div class="row mt-4">
     <div class="col-md-6">
-        <h2 class="text-white fw-bold">Practice Log</h2>
+        <h2 class="text-warning fw-bold">Practice Log 👟</h2>
     </div>
     <div class="col-md-6 text-md-end">
-        <a href="/practice/add" class="btn btn-warning fw-bold">Add Practice</a>
+        <a href="{{ url_for('add_practice') }}" class="btn btn-warning fw-bold">+ Add Practice Session</a>
     </div>
 </div>
 
-<div class="row mt-3 mb-4">
-    <div class="col-md-12">
-        <form action="/practice" method="GET" class="d-flex">
-            <input type="text" name="search" class="form-control bg-dark text-white border-warning me-2" placeholder="Search by skill...">
-            <button type="submit" class="btn btn-warning">Search</button>
-            <a href="/practice" class="btn btn-outline-secondary ms-2">Reset</a>
-        </form>
+<form action="{{ url_for('practice_log') }}" method="GET" class="row mt-3 mb-4">
+    <div class="col-md-10">
+        <input type="text" name="search" class="form-control bg-dark text-white border-warning" placeholder="Search by skill (e.g., Shooting, Dribbling)...">
     </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <ul class="list-group">
-            {% for p in practices %}
-            <li class="list-group-item bg-secondary text-white border-warning mb-2 rounded">
-                <strong>{{ p.date.strftime('%Y-%m-%d') }}</strong> | Skill: <span class="text-warning">{{ p.skill }}</span> ({{ p.duration_mins }} mins)<a href="/practice/edit/{{ p.id }}" class="btn btn-info btn-sm me-2">Edit</a><form action="/practice/delete/{{ p.id }}" method="POST" class="d-inline float-end">
-    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-outline-warning w-100">Search</button>
+    </div>
 </form>
-            </li>
-            {% else %}
-            <li class="list-group-item bg-dark text-muted text-center border-secondary">
-                No practice recorded yet. Get to the gym!
-            </li>
-            {% endfor %}
-        </ul>
+
+<div class="card bg-dark border-secondary">
+    <div class="card-body p-0">
+        <table class="table table-dark table-hover mb-0">
+            <thead class="table-warning text-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Skill Practiced</th>
+                    <th>Duration (Mins)</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for practice in practices %}
+                <tr>
+                    <td>{{ practice.date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ practice.skill }}</td>
+                    <td>{{ practice.duration_mins }} mins</td>
+                    <td class="text-center">
+                        <form action="{{ url_for('delete_practice', id=practice.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('ลบบันทึกการซ้อมนี้ใช่ไหม?')">Delete 🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No practice logs yet. Time to hit the court! 🏀</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
