@@ -1,15 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
 body {
-    background-color: #121212; /* สีดำเข้มๆ ดุดัน */
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* ตกแต่งการ์ดสถิติ */
+/* Navbar Customization */
+.navbar {
+    background: linear-gradient(90deg, #1f2833 0%, #0b0c10 100%) !important;
+    border-bottom: 2px solid #ffc107 !important;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Card Styling - The "God-Tier" UI */
 .card {
-    border: 1px solid #ffc107; /* ขอบสีเหลืองทอง */
-    transition: transform 0.2s; /* เตรียมทำเอฟเฟกต์ */
+    background-color: #1f2833 !important;
+    border: 1px solid #45a29e;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
 }
 
-/* เอฟเฟกต์เด้งๆ เวลาเอาเมาส์ไปชี้ที่การ์ด */
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(69, 162, 158, 0.4);
+    border-color: #66fcf1;
+}
+
+.card-header {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    background-color: #0b0c10 !important;
+    border: 1px solid #45a29e !important;
+    color: #66fcf1 !important;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+    border-color: #66fcf1 !important;
+}
+
+/* Custom Buttons */
+.btn-warning {
+    background-color: #ffc107;
+    color: #0b0c10 !important;
+    font-weight: 800;
+    transition: all 0.3s;
+}
+.btn-warning:hover {
+    background-color: #ffca2c;
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+}
+
+/* Tables */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(69, 162, 158, 0.1) !important;
+    color: #66fcf1;
 }

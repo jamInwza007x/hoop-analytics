@@ -1,58 +1,37 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="row mt-4">
-    <div class="col-md-6">
-        <h2 class="text-warning fw-bold">Match History 🏀</h2>
-    </div>
-    <div class="col-md-6 text-md-end">
-        <a href="{{ url_for('add_match') }}" class="btn btn-warning fw-bold">+ Add Match Record</a>
-    </div>
+    <div class="col-md-6"><h2 class="text-warning fw-bold"><i class="fa-solid fa-trophy"></i> Match History</h2></div>
+    <div class="col-md-6 text-md-end"><a href="{{ url_for('add_match') }}" class="btn btn-warning fw-bold"><i class="fa-solid fa-plus"></i> Add Match Record</a></div>
 </div>
 
-<form action="{{ url_for('match_history') }}" method="GET" class="row mt-3 mb-4">
-    <div class="col-md-10">
-        <input type="text" name="search" class="form-control bg-dark text-white border-warning" placeholder="Search by opponent name...">
-    </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-outline-warning w-100">Search</button>
-    </div>
+<form action="{{ url_for('match_history') }}" method="GET" class="row mt-4 mb-4 g-2">
+    <div class="col-md-10"><input type="text" name="search" class="form-control" placeholder="Search by opponent name..."></div>
+    <div class="col-md-2"><button type="submit" class="btn btn-outline-info w-100"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div>
 </form>
 
-<div class="card bg-dark border-secondary">
-    <div class="card-body p-0">
-        <table class="table table-dark table-hover mb-0">
-            <thead class="table-warning text-dark">
-                <tr>
-                    <th>Opponent</th>
-                    <th>Result</th>
-                    <th>Score (Us - Them)</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for match in matches %}
-                <tr>
-                    <td>{{ match.opponent }}</td>
-                    <td>
-                        <span class="badge {{ 'bg-success' if match.result == 'Win' else 'bg-danger' }}">
-                            {{ match.result }}
-                        </span>
-                    </td>
-                    <td>{{ match.points_scored }} - {{ match.points_conceded }}</td>
-                    <td class="text-center">
-                        <form action="{{ url_for('delete_match', id=match.id) }}" method="POST" style="display:inline;">
-                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('ลบประวัติการแข่งนี้ใช่ไหม?')">Delete 🗑️</button>
-                        </form>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="4" class="text-center text-muted">No match records found.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="card p-0 border-0 shadow-lg">
+    <table class="table table-dark table-hover mb-0">
+        <thead class="table-warning text-dark text-center">
+            <tr><th>Opponent</th><th>Result</th><th>Score (Us - Them)</th><th>Actions</th></tr>
+        </thead>
+        <tbody class="text-center">
+            {% for match in matches %}
+            <tr class="align-middle">
+                <td class="fw-bold text-info">{{ match.opponent }}</td>
+                <td><span class="badge {{ 'bg-success' if match.result == 'Win' else 'bg-danger' }} fs-6">{{ match.result }}</span></td>
+                <td class="fs-5">{{ match.points_scored }} - {{ match.points_conceded }}</td>
+                <td>
+                    <a href="{{ url_for('edit_match', id=match.id) }}" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-pen"></i></a>
+                    <form action="{{ url_for('delete_match', id=match.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('ลบประวัติการแข่งนี้ใช่ไหม?')"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="text-muted py-4">No match records found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

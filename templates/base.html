@@ -5,25 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoop Analytics</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container">
-            <a class="navbar-brand text-warning fw-bold" href="{{ url_for('home') }}">🏀 Hoop Analytics</a>
-            
-            <div class="navbar-nav ms-auto">
-                {% if current_user.is_authenticated %}
-                    <a class="nav-link" href="{{ url_for('home') }}">Dashboard</a>
-                    <a class="nav-link" href="{{ url_for('playbook') }}">Playbook</a>
-                    <a class="nav-link" href="{{ url_for('match_history') }}">Matches</a>
-                    <a class="nav-link" href="{{ url_for('practice_log') }}">Practice</a>
-                    <a class="nav-link text-info" href="{{ url_for('profile', user_id=current_user.id) }}">👤 {{ current_user.username }}</a>
-                    <a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                    <a class="nav-link btn btn-outline-warning btn-sm ms-2" href="{{ url_for('register') }}">Register</a>
-                {% endif %}
+            <a class="navbar-brand text-warning" href="{{ url_for('home') }}"><i class="fa-solid fa-basketball"></i> Hoop Analytics</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto fw-bold">
+                    {% if current_user.is_authenticated %}
+                        <a class="nav-link text-light px-3" href="{{ url_for('home') }}"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                        <a class="nav-link text-light px-3" href="{{ url_for('playbook') }}"><i class="fa-solid fa-clipboard-list"></i> Playbook</a>
+                        <a class="nav-link text-light px-3" href="{{ url_for('match_history') }}"><i class="fa-solid fa-trophy"></i> Matches</a>
+                        <a class="nav-link text-light px-3" href="{{ url_for('practice_log') }}"><i class="fa-solid fa-stopwatch"></i> Practice</a>
+                        <a class="nav-link text-info px-3" href="{{ url_for('profile', user_id=current_user.id) }}"><i class="fa-solid fa-user-ninja"></i> {{ current_user.username }}</a>
+                        <a class="nav-link text-danger px-3" href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    {% else %}
+                        <a class="nav-link px-3" href="{{ url_for('login') }}">Login</a>
+                        <a class="nav-link btn btn-outline-warning btn-sm ms-2" href="{{ url_for('register') }}">Register</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
@@ -32,8 +37,8 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
-                        {{ message }}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow" role="alert">
+                        <strong>แจ้งเตือน:</strong> {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}

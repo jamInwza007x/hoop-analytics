@@ -1,23 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mt-4 text-center">
-    <h2 class="text-warning fw-bold">My Dashboard</h2>
-    <div class="col-md-6 mt-3">
-        <div class="card bg-secondary text-white">
+<div class="row mt-2 mb-5 text-center">
+    <div class="col-12">
+        <h1 class="fw-bold text-warning display-4">Welcome back, {{ user.name }}! <i class="fa-solid fa-fire text-danger"></i></h1>
+        <p class="text-info fs-5">"Hard work beats talent when talent fails to work hard."</p>
+    </div>
+</div>
+
+<div class="row text-center g-4">
+    <div class="col-md-3">
+        <div class="card h-100 border-success">
             <div class="card-body">
-                <h5>Games Played</h5>
-                <h2 class="display-4 fw-bold">{{ total_matches }}</h2>
+                <i class="fa-solid fa-gamepad fa-3x text-success mb-3"></i>
+                <h1 class="display-4 fw-bold text-success">{{ total_matches }}</h1>
+                <h5 class="text-light">Games Played</h5>
             </div>
         </div>
     </div>
-    <div class="col-md-6 mt-3">
-        <div class="card bg-secondary text-white">
+    <div class="col-md-3">
+        <div class="card h-100 border-info">
             <div class="card-body">
-                <h5>Tactics Ready</h5>
-                <h2 class="display-4 fw-bold">{{ total_tactics }}</h2>
+                <i class="fa-solid fa-percent fa-3x text-info mb-3"></i>
+                <h1 class="display-4 fw-bold text-info">{{ win_rate }}%</h1>
+                <h5 class="text-light">Win Rate</h5>
             </div>
         </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 border-warning">
+            <div class="card-body">
+                <i class="fa-solid fa-chess-knight fa-3x text-warning mb-3"></i>
+                <h1 class="display-4 fw-bold text-warning">{{ total_tactics }}</h1>
+                <h5 class="text-light">Playbook Tactics</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 border-danger">
+            <div class="card-body">
+                <i class="fa-solid fa-fire-flame-curved fa-3x text-danger mb-3"></i>
+                <h1 class="display-4 fw-bold text-danger">{{ total_prac_mins }}</h1>
+                <h5 class="text-light">Practice Minutes</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 text-center">
+    <div class="col-12">
+        <a href="{{ url_for('add_match') }}" class="btn btn-lg btn-outline-success mx-2 mt-2"><i class="fa-solid fa-plus"></i> Record Match</a>
+        <a href="{{ url_for('add_tactic') }}" class="btn btn-lg btn-outline-warning mx-2 mt-2"><i class="fa-solid fa-pen-nib"></i> Draw Playbook</a>
+        <a href="{{ url_for('add_practice') }}" class="btn btn-lg btn-outline-danger mx-2 mt-2"><i class="fa-solid fa-dumbbell"></i> Log Practice</a>
     </div>
 </div>
 {% endblock %}
